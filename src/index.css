@@ -241,6 +241,8 @@ tr:hover td { background-color: #f8fafc; }
   justify-content: center;
   padding-top: 5vh;
   padding-bottom: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   animation: fadeIn 0.15s ease-out;
 }
 
@@ -379,6 +381,11 @@ textarea:focus-visible {
   flex-direction: column;
   gap: 0.625rem;
   pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .modal-overlay { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+  .toast-container { left: 1rem; right: 1rem; }
 }
 
 /* ─── PRINT ──────────────────────────────────────────────────────────────────── */

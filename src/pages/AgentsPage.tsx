@@ -174,7 +174,7 @@ export default function AgentsPage() {
 
       {/* Stats globales */}
       {agents.length > 0 && (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="card p-4" style={{ borderColor: '#bbf7d0' }}>
             <p className="text-xs mb-1" style={{ color: '#16a34a' }}>Total agents</p>
             <p className="text-xl font-bold" style={{ color: '#14532d' }}>{agents.length}</p>
@@ -304,7 +304,7 @@ export default function AgentsPage() {
       {showAdd && (
         <div className="modal-overlay">
           <div className="modal-box">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 sticky top-0 bg-white z-10">
+            <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-slate-100 sticky top-0 bg-white z-10">
               <div>
                 <h2 className="font-semibold" style={{ color: '#14532d' }}>Nouvel agent</h2>
                 <p className="text-xs mt-0.5" style={{ color: '#16a34a' }}>Créer un compte agent vendeur</p>
@@ -313,7 +313,7 @@ export default function AgentsPage() {
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <div className="flex-1 overflow-y-auto p-6 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
               {formError && (
                 <div className="flex items-center gap-2 bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 rounded-xl text-sm">
                   <AlertTriangle className="w-4 h-4 shrink-0" />
@@ -360,7 +360,7 @@ export default function AgentsPage() {
                 />
               </div>
             </div>
-            <div className="flex gap-3 px-6 py-4" style={{ borderTop: '1px solid #dcfce7' }}>
+            <div className="flex flex-col sm:flex-row gap-3 px-4 sm:px-6 py-4" style={{ borderTop: '1px solid #dcfce7' }}>
               <button onClick={() => setShowAdd(false)} className="btn-secondary flex-1 justify-center">
                 Annuler
               </button>
@@ -382,7 +382,7 @@ export default function AgentsPage() {
         <div className="modal-overlay">
           <div className="modal-box large">
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 sticky top-0 bg-white z-10">
+            <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-slate-100 sticky top-0 bg-white z-10">
               <div className="flex items-center gap-3">
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold"
@@ -408,7 +408,7 @@ export default function AgentsPage() {
             </div>
 
             {/* Stats résumé */}
-            <div className="grid grid-cols-3 gap-4 px-6 py-4" style={{ borderBottom: '1px solid #dcfce7', background: '#f0fdf4' }}>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 px-4 sm:px-6 py-4" style={{ borderBottom: '1px solid #dcfce7', background: '#f0fdf4' }}>
               <div className="text-center">
                 <p className="text-2xl font-bold" style={{ color: '#14532d' }}>{agentSales.length}</p>
                 <p className="text-xs mt-0.5" style={{ color: '#16a34a' }}>Total ventes</p>
@@ -431,7 +431,7 @@ export default function AgentsPage() {
 
             {/* Recherche dans les ventes */}
             {agentSales.length > 0 && (
-              <div className="px-6 py-3 border-b border-slate-100">
+              <div className="px-4 sm:px-6 py-3 border-b border-slate-100">
                 <div className="relative max-w-xs">
                   <ShoppingCart className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
                   <input
@@ -456,7 +456,8 @@ export default function AgentsPage() {
                   <p className="text-sm font-medium">Aucune vente enregistrée</p>
                 </div>
               ) : (
-                <table className="w-full text-sm">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
                   <thead className="bg-slate-50 border-b border-slate-100 sticky top-0">
                     <tr>
                       <th className="text-left px-4 py-3 text-slate-400 font-medium text-xs">#</th>
@@ -513,7 +514,8 @@ export default function AgentsPage() {
                       </tr>
                     </tfoot>
                   )}
-                </table>
+                  </table>
+                </div>
               )}
             </div>
           </div>

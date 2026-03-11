@@ -339,16 +339,8 @@ export default function ProductsPage() {
       {/* ── Modal Ajouter / Modifier ── */}
       {showModal && (
         <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'transparent',
-            display: 'flex',
-            alignItems: 'flex-start',
-            justifyContent: 'center',
-            zIndex: 100,
-            padding: '32px',
-          }}
+          className="fixed inset-0 z-[100] flex items-start justify-center p-4 sm:p-8"
+          style={{ background: 'transparent' }}
         >
           <div
             style={{
@@ -390,7 +382,7 @@ export default function ProductsPage() {
             </div>
 
             {/* Body — scrollable */}
-            <div style={{ overflowY: 'auto', flex: 1, padding: '24px' }}>
+            <div className="p-4 sm:p-6" style={{ overflowY: 'auto', flex: 1 }}>
               {error && (
                 <div className="flex items-center gap-2 bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 rounded-xl text-sm mb-4">
                   <AlertTriangle className="w-4 h-4 shrink-0" />
@@ -398,8 +390,8 @@ export default function ProductsPage() {
                 </div>
               )}
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="sm:col-span-2">
                   <label className="label">Nom du produit *</label>
                   <input
                     value={form.name}
@@ -448,7 +440,7 @@ export default function ProductsPage() {
                   />
                 </div>
                 {form.purchase_price > 0 && form.selling_price > 0 && (
-                  <div className="col-span-2">
+                  <div className="sm:col-span-2">
                     <div
                       className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium"
                       style={form.selling_price > form.purchase_price
@@ -501,7 +493,7 @@ export default function ProductsPage() {
                     placeholder="Optionnel"
                   />
                 </div>
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <label className="label">Description</label>
                   <textarea
                     value={form.description}

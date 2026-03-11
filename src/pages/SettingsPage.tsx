@@ -97,7 +97,7 @@ export default function SettingsPage() {
         <div className="space-y-4">
           {/* Carte profil */}
           <div className="card p-6">
-            <div className="flex items-center gap-5">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-5">
               <div className="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center text-white font-bold text-2xl flex-shrink-0 relative">
                 {initiale}
                 {user?.role === 'admin' && (
@@ -126,7 +126,7 @@ export default function SettingsPage() {
               <UserCircle className="w-4 h-4 text-slate-400" />
               Informations du compte
             </h4>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {[
                 { label: 'Nom complet',      value: user?.name || '—',                                  icon: User  },
                 { label: 'Adresse email',    value: user?.email || '—',                                 icon: Mail  },
@@ -147,7 +147,7 @@ export default function SettingsPage() {
           
           {/* Sécurité rapide */}
           <div className="card p-5">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
               <div className="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center flex-shrink-0">
                 <ShieldCheck className="w-5 h-5 text-emerald-600" />
               </div>
@@ -157,7 +157,7 @@ export default function SettingsPage() {
                   Mot de passe chiffré avec bcrypt · Authentification JWT 7 jours
                 </p>
               </div>
-              <div className="ml-auto">
+              <div className="sm:ml-auto">
                 <span className="badge bg-emerald-50 text-emerald-700 border border-emerald-100">
                   ● Actif
                 </span>

@@ -167,7 +167,7 @@ export default function InventairePage() {
       )}
 
       {/* KPIs */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="card p-4">
           <div className="flex items-center gap-2 mb-2">
             <Package className="w-4 h-4 text-slate-400" />
@@ -373,7 +373,7 @@ export default function InventairePage() {
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-box">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+            <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-slate-100">
               <div>
                 <h2 className="font-semibold text-slate-800">Mouvement de stock</h2>
                 <p className="text-xs text-slate-400 mt-0.5">Enregistrer une entrée, sortie ou ajustement</p>
@@ -383,7 +383,7 @@ export default function InventairePage() {
               </button>
             </div>
 
-            <div className="p-6 space-y-4">
+            <div className="p-4 sm:p-6 space-y-4">
               {error && (
                 <div className="flex items-center gap-2 bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 rounded-xl text-sm">
                   <AlertTriangle className="w-4 h-4 shrink-0" />
@@ -473,7 +473,7 @@ export default function InventairePage() {
               </div>
             </div>
 
-            <div className="flex gap-3 px-6 py-4 border-t border-slate-100">
+            <div className="flex flex-col sm:flex-row gap-3 px-4 sm:px-6 py-4 border-t border-slate-100">
               <button onClick={() => setShowModal(false)} className="btn-secondary flex-1 justify-center">
                 Annuler
               </button>

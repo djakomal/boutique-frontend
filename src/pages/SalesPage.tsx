@@ -56,6 +56,7 @@ export default function SalesPage() {
   const [note, setNote]           = useState('');
   const [saving, setSaving]       = useState(false);
   const [success, setSuccess]     = useState(false);
+  const [confirmedTotal, setConfirmedTotal] = useState(0); // Montant confirmé de la vente
   const [cartError, setCartError] = useState('');
 
   const load = useCallback(async (silent = false) => {
@@ -123,6 +124,7 @@ export default function SalesPage() {
         note,
       });
       setSuccess(true);
+      setConfirmedTotal(total); // Sauvegarder le montant avant de vider le panier
       toast.success('Vente enregistrée !', `${cart.length} article(s) · ${fmt(total)}`);
       setCart([]); setNote(''); setPayMethod('cash');
       await load(true);
@@ -150,6 +152,7 @@ export default function SalesPage() {
   const openModal = () => {
     setShowModal(true); setCart([]); setCartError('');
     setSuccess(false); setNote(''); setPayMethod('cash'); setSelProd(''); setQuantity(1);
+    setConfirmedTotal(0);
   };
 
   // Stats rapides
@@ -203,7 +206,7 @@ export default function SalesPage() {
       </div>
 
       {/* Stats rapides */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="card p-4" style={{ borderColor: '#bbf7d0' }}>
           <div className="flex items-center gap-2 mb-2">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: '#dcfce7' }}>
@@ -380,7 +383,7 @@ export default function SalesPage() {
         <div className="modal-overlay">
           <div className="modal-box large">
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 sticky top-0 bg-white z-10">
+            <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-slate-100 sticky top-0 bg-white z-10">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 bg-slate-100 rounded-xl flex items-center justify-center">
                   <Receipt className="w-5 h-5 text-slate-600" />
@@ -407,12 +410,12 @@ export default function SalesPage() {
                 </div>
                 <p className="text-xl font-bold text-slate-800">Vente enregistrée !</p>
                 <p className="text-slate-500 text-sm">
-                  Montant : <span className="font-bold text-slate-800">{fmt(total)}</span>
+                  Montant : <span className="font-bold text-slate-800">{fmt(confirmedTotal)}</span>
                 </p>
                 <p className="text-xs text-slate-400">Fermeture automatique…</p>
               </div>
             ) : (
-              <div className="flex-1 overflow-y-auto p-6 space-y-5">
+              <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5">
                 {cartError && (
                   <div className="flex items-center gap-2 bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 rounded-xl text-sm">
                     <AlertTriangle className="w-4 h-4 shrink-0" />
@@ -532,7 +535,7 @@ export default function SalesPage() {
                 )}
 
                 {/* Paiement */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="label">Mode de paiement</label>
                     <div className="flex flex-col gap-2">
@@ -575,7 +578,7 @@ export default function SalesPage() {
                   </div>
                 )}
 
-                <div className="flex gap-3 pt-2">
+                <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <button onClick={() => setShowModal(false)} className="btn-secondary flex-1 justify-center">
                     Annuler
                   </button>

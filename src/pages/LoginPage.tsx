@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Store, Eye, EyeOff, AlertCircle, ShieldCheck, Package, BarChart2, Users, Leaf, Shield, UserCheck } from 'lucide-react';
+import { Store, Eye, EyeOff, AlertCircle, ShieldCheck, Package, BarChart2, Users } from 'lucide-react';
 
 
 const FEATURES = [
@@ -125,7 +125,7 @@ export default function LoginPage() {
       </div>
 
       {/* ── Panneau droit — Formulaire ── */}
-      <div className="flex-1 flex items-center justify-center p-8" style={{ background: '#f8fafc' }}>
+      <div className="flex-1 flex items-center justify-center p-4 sm:p-8" style={{ background: '#f8fafc' }}>
         <div className="w-full max-w-sm">
           {/* Mobile logo */}
           <div className="lg:hidden text-center mb-8">

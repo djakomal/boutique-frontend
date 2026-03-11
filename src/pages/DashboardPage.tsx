@@ -194,7 +194,7 @@ export default function DashboardPage() {
           <StatCard icon={<IcoPackage/>} label="Produits disponibles"   value={String(agentStats.total_products)} bg="#ecfccb" iconColor="#65a30d" border="#d9f99d" sub="références actives" />
         </div>
 
-        <div style={{ background: '#fff', border: '1px solid #dcfce7', borderRadius: 14, padding: 24 }}>
+        <div className="p-4 sm:p-6" style={{ background: '#fff', border: '1px solid #dcfce7', borderRadius: 14 }}>
           <div style={{ marginBottom: 20 }}>
             <h2 style={{ fontSize: 15, fontWeight: 600, color: '#14532d', display: 'flex', alignItems: 'center', gap: 6 }}>
               <IcoActivity />Mes revenus — 7 derniers jours
@@ -254,7 +254,7 @@ export default function DashboardPage() {
         </div>
 
         {/* 3 KPI — exactement comme le screenshot */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <StatCard icon={<IcoTrend/>}                                             label="Revenus totaux"    value={fmt(stats.total_revenue)}      bg="#dcfce7" iconColor="#16a34a" border="#bbf7d0" sub={`${stats.total_sales} ventes`} />
           <StatCard icon={<IcoUsers/>}                                             label="Agents actifs"     value={String(stats.agents_count)}    bg="#dcfce7" iconColor="#16a34a" border="#bbf7d0" sub="vendeurs" />
           <StatCard icon={<IcoAlert color={stats.low_stock_count > 0 ? '#ca8a04' : '#16a34a'} />}
@@ -275,10 +275,10 @@ export default function DashboardPage() {
         )}
 
         {/* Graphiques */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16 }}>
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4">
 
           {/* BarChart revenus */}
-          <div style={{ background: '#fff', border: '1px solid #dcfce7', borderRadius: 14, padding: 24, minWidth: 0 }}>
+          <div className="p-4 sm:p-6 min-w-0" style={{ background: '#fff', border: '1px solid #dcfce7', borderRadius: 14 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
               <div>
                 <h2 style={{ fontSize: 15, fontWeight: 600, color: '#14532d', display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -306,7 +306,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Top produits */}
-          <div style={{ background: '#fff', border: '1px solid #dcfce7', borderRadius: 14, padding: 24, minWidth: 0 }}>
+          <div className="p-4 sm:p-6 min-w-0" style={{ background: '#fff', border: '1px solid #dcfce7', borderRadius: 14 }}>
             <h2 style={{ fontSize: 15, fontWeight: 600, color: '#14532d', marginBottom: 4 }}>Top produits</h2>
             <p style={{ fontSize: 12, color: '#16a34a', marginBottom: 20 }}>Par chiffre d'affaires</p>
             {stats.top_products?.length > 0 ? (
@@ -343,7 +343,7 @@ export default function DashboardPage() {
 
         {/* Volume transactions */}
         {hasData && hasSales && (
-          <div style={{ background: '#fff', border: '1px solid #dcfce7', borderRadius: 14, padding: 24 }}>
+          <div className="p-4 sm:p-6" style={{ background: '#fff', border: '1px solid #dcfce7', borderRadius: 14 }}>
             <div style={{ marginBottom: 20 }}>
               <h2 style={{ fontSize: 15, fontWeight: 600, color: '#14532d', display: 'flex', alignItems: 'center', gap: 6 }}>
                 <IcoActivity />Volume de transactions — 7 jours

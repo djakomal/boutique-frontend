@@ -2,9 +2,9 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard, Package, ShoppingCart, ClipboardList,
-  Users, Settings, LogOut, Store, ChevronLeft, ChevronRight,
+  Users, Settings, LogOut, Store, ChevronLeft, ChevronRight, X,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const adminNav = [
   { to: '/dashboard',  icon: LayoutDashboard, label: 'Dashboard'  },
@@ -23,21 +23,44 @@ const agentNav = [
   { to: '/parametres', icon: Settings,         label: 'Paramètres' },
 ];
 
-export default function Sidebar() {
+type SidebarProps = {
+  mobileOpen?: boolean;
+  onMobileClose?: () => void;
+};
+
+export default function Sidebar({ mobileOpen = false, onMobileClose }: SidebarProps) {
   const { user, logout, isAdmin } = useAuth();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const navItems = isAdmin ? adminNav : agentNav;
 
-  const handleLogout = () => { logout(); navigate('/login'); };
+  useEffect(() => {
+    if (mobileOpen) setCollapsed(false);
+  }, [mobileOpen]);
+
+  const handleLogout = () => { logout(); onMobileClose?.(); navigate('/login'); };
 
   return (
-    <aside
-      className={`
-        sidebar-bg sticky top-0 z-40 flex flex-col transition-all duration-300 ease-in-out h-screen flex-shrink-0
-        ${collapsed ? 'w-[68px]' : 'w-[230px]'}
-      `}
-    >
+    <>
+      {/* Backdrop mobile */}
+      {mobileOpen && (
+        <button
+          type="button"
+          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[2px] md:hidden"
+          aria-label="Fermer le menu"
+          onClick={() => onMobileClose?.()}
+        />
+      )}
+
+      <aside
+        className={`
+          sidebar-bg flex flex-col transition-all duration-300 ease-in-out flex-shrink-0
+          fixed inset-y-0 left-0 z-50 h-[100dvh] md:h-screen md:sticky md:top-0 md:z-40 md:inset-auto md:left-auto
+          ${mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+          ${collapsed ? 'w-[68px]' : 'w-[78vw] max-w-[280px] md:w-[230px]'}
+          shadow-2xl md:shadow-none
+        `}
+      >
       {/* ── Logo ───────────────────────────────────── */}
       <div
         className="flex items-center justify-between px-3 py-4"
@@ -57,12 +80,24 @@ export default function Sidebar() {
                 <p className="text-[10px]" style={{ color: '#86efac' }}>Gestion alimentaire</p>
               </div>
             </div>
-            <button
-              onClick={() => setCollapsed(true)}
-              className="p-1 rounded-md transition text-emerald-200 hover:bg-white/10"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                type="button"
+                onClick={() => setCollapsed(true)}
+                className="hidden md:inline-flex p-1 rounded-md transition text-emerald-200 hover:bg-white/10"
+                aria-label="RÃ©duire le menu"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => onMobileClose?.()}
+                className="md:hidden p-1.5 rounded-md transition text-emerald-200 hover:bg-white/10"
+                aria-label="Fermer le menu"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
           </>
         ) : (
           <div className="flex flex-col items-center gap-2 w-full">
@@ -97,7 +132,8 @@ export default function Sidebar() {
             key={item.to}
             to={item.to}
             title={collapsed ? item.label : undefined}
-            className={({ isActive }) => `block`}
+            onClick={() => onMobileClose?.()}
+            className="block"
           >
             {({ isActive }) => (
               <div
@@ -171,6 +207,7 @@ export default function Sidebar() {
           {!collapsed && <span>Déconnexion</span>}
         </button>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 }
